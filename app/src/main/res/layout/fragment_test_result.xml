@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_test_result"
+    tools:context="com.example.lh.testonline.MutipleChoiceFragment">
+
+
+    <TextView
+        android:text="null"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:textSize="30sp"
+        android:id="@+id/resultQuestionText" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/textYourAnswer"
+        android:textSize="30sp"
+        android:layout_below="@+id/resultQuestionText"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/textCorrectAnswer"
+        android:textSize="30sp"
+        android:layout_alignBaseline="@+id/textYourAnswer"
+        android:layout_alignBottom="@+id/textYourAnswer"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:id="@+id/textScore" />
+</RelativeLayout>
