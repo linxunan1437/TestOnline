@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_give_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/give_test_bg"
+    tools:context="com.example.lh.testonline.GiveTestActivity">
+
+    <Button
+        android:text="从题库中选择"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#00000000"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/buttonSearchQuestion"
+        android:layout_alignEnd="@+id/textView5" />
+
+    <Button
+        android:text="出新题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonNewQuestion"
+        android:layout_alignParentBottom="true"
+        android:background="#00000000"
+        android:layout_toEndOf="@+id/buttonSearchQuestion"
+        android:layout_alignTop="@+id/buttonSearchQuestion" />
+
+    <Button
+        android:text="设置时间"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonTimeSetting"
+        android:layout_alignParentBottom="true"
+        android:background="#00000000"
+        android:layout_toEndOf="@+id/buttonNewQuestion"
+        android:layout_alignTop="@+id/buttonNewQuestion" />
+
+    <Button
+        android:text="发布"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonSubmit"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/buttonTimeSetting"
+        android:background="#00000000"
+        android:layout_alignTop="@+id/buttonTimeSetting" />
+
+    <TextView
+        android:text=""
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/editName"
+        android:textSize="22sp"
+        android:layout_alignStart="@+id/editName"
+        android:id="@+id/textTime" />
+
+    <TextView
+        android:text="考试名称"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewName"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:layout_alignBaseline="@+id/editName"
+        android:layout_alignBottom="@+id/editName"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:inputType="textPersonName"
+        android:text=""
+        android:hint="输入考试名称"
+        android:gravity="bottom"
+        android:ems="10"
+        android:id="@+id/editName"
+        android:background="#00000000"
+        android:textSize="24sp"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="考试时间"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView12"
+        android:textSize="24sp"
+        android:layout_below="@+id/textViewName"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="班级"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView20"
+        android:textSize="24sp"
+        android:layout_below="@+id/textView12"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="题目列表"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:textSize="24sp"
+        android:layout_below="@+id/textView20"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:id="@+id/questionList"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="点击此处选择班级"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:id="@+id/textViewClasses"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/textView20"
+        android:layout_alignBottom="@+id/textView20"
+        android:layout_alignStart="@+id/textTime" />
+
+
+</RelativeLayout>

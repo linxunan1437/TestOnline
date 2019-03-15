@@ -24,7 +24,7 @@ import static staticSetting.Setting.projectName;
 import static staticSetting.Setting.serverUrl;
 
 public class modifiypasswordAcitivity extends AppCompatActivity {
-    EditText editTextOld,editTextNew;
+    EditText editTextOld,editTextNew,editAssert;
     Button loginbutton;
     CheckBox isTutor;
     ConfigUtil configUtil;
@@ -36,12 +36,22 @@ public class modifiypasswordAcitivity extends AppCompatActivity {
         configUtil = new ConfigUtil(this);
         editTextOld=(EditText)findViewById(R.id.editOldPass);
         editTextNew=(EditText)findViewById(R.id.editNewPass);
+        editAssert=(EditText)findViewById(R.id.editAssertPass);
         loginbutton=(Button)findViewById(R.id.buttonChangePassword);
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = serverUrl+"/"+projectName+"/ModifyPasswordServlet";
-                new modifiypasswordAcitivity.myTask().execute(url);
+                if(editAssert.getText().toString().equals(editTextNew.getText().toString())) {
+                    String pass = configUtil.getUser().getPassword();
+                    if(!editTextOld.getText().toString().equals(pass)){
+                        Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    String url = serverUrl + "/" + projectName + "/ModifyServlet";
+                    new modifiypasswordAcitivity.myTask().execute(url);
+                }else{
+                    Toast.makeText(getApplicationContext(),"两次输入的新密码不一致",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -78,7 +88,8 @@ public class modifiypasswordAcitivity extends AppCompatActivity {
         protected void onPostExecute(String result){
             super.onPostExecute(result);
             //返回修改信息
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
+            if(result.equals("success"))Toast.makeText(getApplicationContext(),"修改成功",Toast.LENGTH_LONG).show();
+            else Toast.makeText(getApplicationContext(),"修改失败",Toast.LENGTH_LONG).show();
         }
     }
 }

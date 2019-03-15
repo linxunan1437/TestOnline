@@ -14,6 +14,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import DataType.User;
+import WebUtil.ConfigUtil;
+
 public class MainActivity extends AppCompatActivity {
     ListView listView;
     @Override
@@ -21,34 +24,45 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("主菜单");
+
         listView=(ListView)findViewById(R.id.listview);
-        String[] tools=new String[]{"账号管理","考试","课程/班级"};
+        String[] tools=new String[]{"个人账号管理","考试管理","课程/班级管理","班级群聊"};
         listView.setAdapter(new ArrayAdapter<String>(MainActivity.this,android.R.layout.simple_list_item_1,tools));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             Intent intent;
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                switch (position){
-                    case 0:
-                    {
-                        intent = new Intent(MainActivity.this,AccountManageActivity.class);
-                        startActivity(intent);
-                    }break;
-                    case 1:
-                    {
-                        intent = new Intent(MainActivity.this,TestManagerActivity.class);
-                        startActivity(intent);
-                    }break;
-                    case 2:
-                    {
-                        intent = new Intent(MainActivity.this,ModifyClassActivity.class);
-                        startActivity(intent);
-                    }break;
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    switch (position) {
+                        case 0: {
+                            intent = new Intent(MainActivity.this, AccountManageActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
+                        case 1: {
+                            intent = new Intent(MainActivity.this, TestManagerActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
+                        case 2: {
+
+                            intent = new Intent(MainActivity.this, ClassManageActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
+                        case 3:{
+                            intent = new Intent(MainActivity.this, ChangeCourseActivity.class);
+                            intent.putExtra("opentype","selectChat");
+                            startActivity(intent);
+                        }break;
+
+                    }
                 }
-            }
         });
     }
-
-
 }
+
+
+

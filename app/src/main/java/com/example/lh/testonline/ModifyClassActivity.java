@@ -1,8 +1,10 @@
 package com.example.lh.testonline;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,6 +59,7 @@ public class ModifyClassActivity extends AppCompatActivity {
 
 
     }
+    //
     //搜索post
     public String searchClass(String url){
         String success= "";
@@ -69,13 +72,14 @@ public class ModifyClassActivity extends AppCompatActivity {
         return success;
     }
     //添加post
-    public String addClass(String url){
+    public String addClass(String url,String classid){
         String success= "";
         String key=textSearch.getText().toString();
         FormBody formBody = new FormBody.Builder()
                 .add("modifyType", "class")
                 .add("operation","add")
                 .add("uid", String.valueOf(new ConfigUtil(this).getUser().getUid()))
+                .add("classid",classid)
                 .build();
         success= WebConnection.doPost(url,formBody);
         return success;
@@ -91,7 +95,7 @@ public class ModifyClassActivity extends AppCompatActivity {
             if(operation.equals("search"))
                 return searchClass(url);
             if(operation.equals("add"))
-                return addClass(url);
+                return addClass(url,params[2]);
             return result;
         }
         protected void onPostExecute(String result){
@@ -123,17 +127,43 @@ public class ModifyClassActivity extends AppCompatActivity {
             resourceId=textViewId;
         }
         @Override
-        public View getView(int position,View convertView,ViewGroup parent){
+        public View getView(final int position, View convertView, ViewGroup parent){
             Classes classes= getItem(position);
             View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
             TextView textView= (TextView)view.findViewById(R.id.textClassSearchResult);
             textView.setText(classes.toString());
             Button buttonAddClass=(Button)view.findViewById(R.id.buttonAddClass);
+            buttonAddClass.setText("添加");
             buttonAddClass.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String url = serverUrl+"/"+projectName+"/ModifyServlet";
-                    new ModifyClassActivity.myTask().execute(url,"add");
+                    //    通过AlertDialog.Builder这个类来实例化我们的一个AlertDialog的对象
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ModifyClassActivity.this);
+                    //    设置Title的内容
+                    builder.setTitle("确认");
+                    //    设置Content来显示一个信息
+                    builder.setMessage("确定添加吗？");
+                    //    设置一个PositiveButton
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            String url = serverUrl+"/"+projectName+"/ModifyServlet";
+                            new ModifyClassActivity.myTask().execute(url,"add",classeslist.get(position).getId());
+                        }
+                    });
+                    //    设置一个NegativeButton
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                        }
+                    });
+
+                    builder.show();
+
                 }
             });
             return view;

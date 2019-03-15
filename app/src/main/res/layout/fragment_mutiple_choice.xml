@@ -7,19 +7,42 @@
 
 
     <TextView
-        android:text="null"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:textSize="30sp"
-        android:id="@+id/questionText" />
+        android:id="@+id/questionText"
+        android:scrollbars="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:text="答案"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView24"
+        android:layout_below="@+id/questionText"
+        android:layout_alignParentStart="true"
+        android:textSize="24sp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:layout_below="@+id/questionText"
-        android:layout_alignParentStart="true"
-        android:id="@+id/editAnswerText" />
+        android:hint="请输入回答内容"
+        android:id="@+id/editAnswerText"
+        android:layout_below="@+id/textView24"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="问题"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView23"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

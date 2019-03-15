@@ -3,23 +3,26 @@
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:id="@+id/buttonAddClass"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:text="TextView"
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:id="@+id/textClassSearchResult"
         android:textSize="20sp"
+
         android:layout_alignBaseline="@+id/buttonAddClass"
         android:layout_alignBottom="@+id/buttonAddClass"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="删除"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/buttonAddClass"
+        android:textSize="24sp"
+        android:background="#00000000"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

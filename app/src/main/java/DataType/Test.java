@@ -1,6 +1,7 @@
 package DataType;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
@@ -15,11 +16,18 @@ public class Test {
 	private List<Question> questions;
 	private String starttime,endtime;
 	private int totalScore,timeLimit;
+	private String classid;
+	public String getClassid() {
+		return classid;
+	}
+	public void setClassid(String classid) {
+		this.classid = classid;
+	}
 	public String getStarttime() {
 		return starttime;
 	}
 	public Test(String name, String id, List<Question> questions, String starttime, String endtime, int totalScore,
-			int timeLimit) {
+				int timeLimit) {
 		super();
 		this.name = name;
 		this.id = id;
@@ -44,7 +52,7 @@ public class Test {
 	public void setEndtime(Timestamp timestamp) {
 		this.endtime = timestamp.toString();
 	}
-	public Test(){}
+	public Test(){questions=new ArrayList<Question>();}
 	public List<Question> getQuestions() {
 		return questions;
 	}

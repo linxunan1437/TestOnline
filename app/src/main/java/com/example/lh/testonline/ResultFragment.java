@@ -2,6 +2,7 @@ package com.example.lh.testonline;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ public class ResultFragment extends Fragment {
         yourAnswerText = (TextView)view.findViewById(R.id.textYourAnswer);
         correctAnswerText= (TextView)view.findViewById(R.id.textCorrectAnswer);
         scoreText=(TextView)view.findViewById(R.id.textScore);
+        questionText.setMovementMethod(ScrollingMovementMethod.getInstance());
         return view;
     }
 

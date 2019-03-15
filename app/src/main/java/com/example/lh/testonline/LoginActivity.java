@@ -25,7 +25,7 @@ import static staticSetting.Setting.serverUrl;
 
 public class LoginActivity extends AppCompatActivity {
     EditText editTextName,editTextPass;
-    Button loginbutton;
+    Button loginbutton,signupbutton;
     CheckBox isTutor;
     ConfigUtil configUtil;
     @Override
@@ -38,15 +38,26 @@ public class LoginActivity extends AppCompatActivity {
         editTextPass=(EditText)findViewById(R.id.editPassword);
         loginbutton=(Button)findViewById(R.id.button);
         isTutor=(CheckBox)findViewById(R.id.checkBox);
+        signupbutton=(Button)findViewById(R.id.buttonSignUp);
         loginbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = serverUrl+"/"+projectName+"/LoginServlet";
-                new myTask().execute(url);
+                String url = serverUrl + "/" + projectName + "/LoginServlet";
+                new myTask().execute(url,"login");
             }
         });
+        signupbutton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent=new Intent(LoginActivity.this,SignupActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
     }
-    public String dologin(String url){
+    public String dologin(String url,String type){
         //
         String success= "";
         String username=editTextName.getText().toString();
@@ -54,32 +65,30 @@ public class LoginActivity extends AppCompatActivity {
         String tutor="no";
         if(isTutor.isChecked())tutor="yes";
         FormBody formBody = new FormBody.Builder()
+                .add("type",type)
                 .add("username", username)
                 .add("password", password)
                 .add("tutor",tutor)
                 .build();
-//        List<NameValuePair> list = new ArrayList<NameValuePair>();
-//        NameValuePair p1=new BasicNameValuePair("username",username);
-//        NameValuePair p2=new BasicNameValuePair("password",password);
-//        list.add(p1);
-//        list.add(p2);
-//        list.add(new BasicNameValuePair("tutor",tutor));
         success= WebConnection.doPost(url,formBody);
         return success;
     }
+
+
     class myTask extends AsyncTask<String,Integer,String>{
         @Override
         protected String doInBackground(String... params){
             //后台运行
             String url = params[0];
-            String result=dologin(url);
+            String result=dologin(url,params[1]);
+
             return result;
         }
         protected void onPostExecute(String result){
             super.onPostExecute(result);
             //返回登陆信息
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
-            if(result.equals("fail"))return;
+
+            if(result.equals("fail")){Toast.makeText(getApplicationContext(),"用户名或密码错误",Toast.LENGTH_LONG).show();return;}
             configUtil.setUserJson(result);//若不失败则需要记录用户信息供后面使用
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);

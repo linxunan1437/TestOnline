@@ -19,6 +19,7 @@ public class Question {
 	public String getQuestion() {
 		return question;
 	}
+	public Question(){}
 	public Question(String answer,int score){this.answer=answer;this.score=score;}
 	public Question(String id,String question, String answer, String type,int score) {
 		super();
@@ -47,7 +48,6 @@ public class Question {
 	public void setType(String type) {
 		this.type = type;
 	}
-
 
 	
 	

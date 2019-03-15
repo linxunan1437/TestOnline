@@ -13,14 +13,19 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.apache.http.ExceptionLogger;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import DataType.Test;
+import DataType.User;
 import WebUtil.GsonUtils;
 import WebUtil.WebConnection;
 import WebUtil.ConfigUtil;
@@ -37,10 +42,7 @@ public class OpeningTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening_test);
-
         init();
-
-
     }
     private void init(){
         listView=(ListView)findViewById(R.id.listview);
@@ -83,9 +85,11 @@ public class OpeningTestActivity extends AppCompatActivity {
             if(tlist!=null){
                 //若无可用考试则为空
                 for(int i=0;i<tlist.size();i++){
-                    //获得可用考试的名字,并显示在表上
-                    if(opentype.equals("test"))tools.add(tlist.get(i).getName()+" 开始时间:"+tlist.get(i).getStarttime()+" 结束时间"+tlist.get(i).getEndtime());
+                    //获得可用考试l的名字,并显示在表上
+                    if(opentype.equals("test"))tools.add(tlist.get(i).getName()+"\n开始时间:"+tlist.get(i).getStarttime()+" \n结束时间"+tlist.get(i).getEndtime());
                     if(opentype.equals("result"))tools.add(tlist.get(i).getName()+"   "+tlist.get(i).getTotalScore()+"分");
+                    if(opentype.equals("marking"))tools.add(tlist.get(i).getName());
+                    if(opentype.equals("teacherResult"))tools.add(tlist.get(i).getName());
                 }
             }else{tools.add("no test");}
             listView.setAdapter(new ArrayAdapter<String>(OpeningTestActivity.this,android.R.layout.simple_list_item_1,tools));
@@ -96,6 +100,34 @@ public class OpeningTestActivity extends AppCompatActivity {
                                         int position, long id) {
                     if(tlist==null)return;//若无考试则无响应
                     if(tlist.get(position).getTotalScore()==-1)return;
+                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date st=new Date(),ed=new Date();
+                    if(opentype.equals("test")){
+                        ConfigUtil configUtil=new ConfigUtil(OpeningTestActivity.this);
+                        User u= configUtil.getUser();
+                        //如果是考试,验证是否到时间
+                        try{
+                            st=format.parse(tlist.get(position).getStarttime());
+                            ed=format.parse(tlist.get(position).getEndtime());
+                            //调整到东八区
+//                           long temp=st.getTime();temp-=3600000*8;st.setTime(temp);
+//                            temp=ed.getTime();temp-=3600000*8;ed.setTime(temp);
+                        }catch (Exception e){
+                        }
+                        Date now=new Date();
+                        //验证是否是老师身份,若为老师则未到时间也能查看
+
+                        if((now.before(st))&&(!u.getTutor().equals("yes"))){
+                            Toast.makeText(OpeningTestActivity.this, "考试未开放", Toast.LENGTH_LONG);
+                            return;
+                        }
+                        if(now.after(ed)){
+
+                            Toast.makeText(OpeningTestActivity.this, "考试已结束", Toast.LENGTH_LONG);
+                            return;
+                        }
+                    }
+
                     intent = new Intent(OpeningTestActivity.this,TestAcitivity.class);
                     intent.putExtra("testID",tlist.get(position).getId());
                     intent.putExtra("type",opentype);

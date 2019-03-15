@@ -21,6 +21,7 @@ public class Classes {
 		this.className = className;
 		this.teacher = teacher;
 	}
+	public Classes(){}
 	public Classes(String id, String className, List<User> students, User teacher) {
 		super();
 		this.id = id;
@@ -43,5 +44,6 @@ public class Classes {
 	public void setTeacher(User teacher) {
 		this.teacher = teacher;
 	}
-	public String toString(){return '['+this.id+']'+' '+this.className+' '+this.teacher;}
+	@Override
+	public String toString(){return '['+this.id+']'+' '+this.className+' '+this.teacher.getUsername();}
 }

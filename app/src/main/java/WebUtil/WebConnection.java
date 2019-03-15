@@ -41,6 +41,9 @@ public class WebConnection  {
         return "fail";
     }
 
+
+    //webSocket的调用,使用okhttp
+    
     //以下为原post方法,使用HttpPost,已过时
     /*public static String doPost(String url,List<NameValuePair> list){
 

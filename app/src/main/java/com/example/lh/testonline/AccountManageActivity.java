@@ -19,7 +19,7 @@ public class AccountManageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account_manage);
         this.setTitle("账号管理");
         listView=(ListView)findViewById(R.id.listview);
-        String[] tools=new String[]{"修改密码","修改班级"};
+        String[] tools=new String[]{"修改密码"};
         listView.setAdapter(new ArrayAdapter<String>(AccountManageActivity.this,android.R.layout.simple_list_item_1,tools));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             Intent intent;
@@ -32,11 +32,7 @@ public class AccountManageActivity extends AppCompatActivity {
                         intent = new Intent(AccountManageActivity.this,modifiypasswordAcitivity.class);
                         startActivity(intent);
                     }break;
-                    case 1:
-                    {
-                        intent = new Intent(AccountManageActivity.this,TestManagerActivity.class);
-                        startActivity(intent);
-                    }break;
+
 
                 }
             }

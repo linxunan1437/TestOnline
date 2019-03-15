@@ -3,43 +3,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fragment_test_result"
-    tools:context="com.example.lh.testonline.MutipleChoiceFragment">
+    tools:context="com.example.lh.testonline.ResultFragment">
 
 
     <TextView
-        android:text="null"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
-        android:textSize="30sp"
-        android:id="@+id/resultQuestionText" />
+        android:textSize="24sp"
+        android:id="@+id/resultQuestionText"
+        android:scrollbars="vertical"
+        android:textColor="@android:color/black"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
 
     <TextView
-        android:text="TextView"
+        android:text="问题"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:id="@+id/textYourAnswer"
-        android:textSize="30sp"
-        android:layout_below="@+id/resultQuestionText"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView26"
+        android:textSize="24sp" />
 
     <TextView
-        android:text="TextView"
+        android:text="你的答案"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultQuestionText"
+        android:id="@+id/textView27"
+        android:textSize="24sp" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/textCorrectAnswer"
-        android:textSize="30sp"
-        android:layout_alignBaseline="@+id/textYourAnswer"
-        android:layout_alignBottom="@+id/textYourAnswer"
-        android:layout_centerHorizontal="true" />
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textView28"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="TextView"
+        android:text="正确答案"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:id="@+id/textScore" />
+        android:id="@+id/textView28"
+        android:textSize="24sp"
+        android:layout_below="@+id/textYourAnswer"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/textYourAnswer"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/textView27"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textScore"
+        android:textSize="24sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="分数:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textScore"
+        android:layout_toStartOf="@+id/textScore"
+        android:id="@+id/textView29"
+        android:textSize="24sp" />
 </RelativeLayout>
